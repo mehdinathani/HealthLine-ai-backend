@@ -1,29 +1,17 @@
-# app/tools.py
+# app/my_tools.py
 
 import json
-from pathlib import Path
-import os
 from agents import function_tool
+from typing import Optional
 
-# Define the base directory of the project
-# This makes our file paths work, no matter where we run the script from
-# PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-# # Define paths to our data files using this root
-# SCHEDULE_FILE = PROJECT_ROOT / "data" / "full_hospital_schedule_with_specialty.json"
-# BOOKINGS_FILE = PROJECT_ROOT / "data" / "bookings.json"
-
+# --- File Paths (This part is correct) ---
 SCHEDULE_FILE = "full_hospital_schedule_with_specialty.json"
 BOOKINGS_FILE = "bookings.json"
 
+# --- Helper Function (This part is correct) ---
 def load_schedule() -> list[dict]:
-    """
-    Loads the full hospital schedule from the JSON file.
-
-    Returns:
-        list[dict]: A list of dictionaries, where each dictionary
-                    represents a doctor's schedule entry.
-    """
+    """Loads the full hospital schedule from the JSON file."""
     try:
         with open(SCHEDULE_FILE, 'r') as f:
             return json.load(f)
@@ -34,110 +22,78 @@ def load_schedule() -> list[dict]:
         print(f"Error: The schedule file at {SCHEDULE_FILE} is not a valid JSON.")
         return []
 
+# --- Tool Functions (These are the ones we need to fix) ---
+
 @function_tool
-def find_doctor_by_name(doctor_name: str) -> list[dict]:
+def find_doctor_by_name(doctor_name: str) -> str: # FIXED: Return type is now str
+    print("Find Doctor tool called")
     """
     Finds all schedule entries for a doctor by their name, allowing for partial matches.
-
-    Args:
-        doctor_name (str): The partial or full name of the doctor to search for.
-
-    Returns:
-        list[dict]: A list of matching schedule entries. Returns an empty list if no match is found.
+    Returns the result as a JSON string.
     """
     schedule = load_schedule()
     if not doctor_name:
-        return []
-        
-    # Case-insensitive search
-    search_term = doctor_name.lower()
+        return json.dumps([]) # FIXED: Return an empty JSON list as a string
     
+    search_term = doctor_name.lower()
     matching_doctors = [
         entry for entry in schedule
         if search_term in entry['doctor'].lower()
     ]
-    return json.dump(matching_doctors)
-
-# Add this to app/tools.py
+    return json.dumps(matching_doctors) # FIXED: Use json.dumps to return a string
 
 @function_tool
-def list_doctors_by_specialty(specialty: str) -> list[dict]:
+def list_doctors_by_specialty(specialty: str) -> str: # FIXED: Return type is now str
     """
     Finds all doctors within a given specialty.
-
-    Args:
-        specialty (str): The specialty to search for (e.g., "Cardiologist").
-
-    Returns:
-        list[dict]: A list of schedule entries for all doctors in that specialty.
+    Returns the result as a JSON string.
     """
     schedule = load_schedule()
     search_term = specialty.lower()
-    
     matching_specialists = [
         entry for entry in schedule
         if search_term in entry['specialty'].lower()
     ]
-    return matching_specialists
+    return json.dumps(matching_specialists) # FIXED: Return the list as a JSON string
 
+# --- Helper Functions (Not tools for the agent) ---
 
-# Add this to app/tools.py
-def check_availability(doctor_name: str, day: str) -> dict | None:
+def check_availability(doctor_name: str, day: str) -> Optional[dict]:
     """
-    Checks if a specific doctor is available on a specific day.
-
-    Args:
-        doctor_name (str): The name of the doctor.
-        day (str): The day of the week (e.g., "Monday").
-
-    Returns:
-        dict | None: The schedule entry if the doctor is available, otherwise None.
+    Internal helper function to check availability. Not a tool for the agent.
     """
-    doctor_schedules = find_doctor_by_name(doctor_name)
+    # FIXED: This is a critical change. Since find_doctor_by_name now returns a string,
+    # we must call its underlying function with .func() and then parse the JSON string.
+    schedules_str = find_doctor_by_name.func(doctor_name=doctor_name)
+    doctor_schedules = json.loads(schedules_str)
+    
     if not doctor_schedules:
         return None
 
     search_day = day.lower()
     for entry in doctor_schedules:
-        # Check if the requested day is in the list of available days for that slot
         if search_day in [d.lower() for d in entry['days']]:
-            # Also check they are not on leave
             if "on leave" not in entry.get("time", "").lower():
-                return entry  # Return the specific available slot
+                return entry
     
-    return None # Return None if no slot matches the day
+    return None
 
-
-# Add these two functions to app/tools.py
 def send_sms(phone: str, message: str):
-    """
-    Simulates sending an SMS by printing the message to the console.
-
-    Args:
-        phone (str): The phone number to send the SMS to.
-        message (str): The content of the message.
-    """
+    """Simulates sending an SMS by printing the message to the console."""
     print(f"[SMS to {phone}] {message}")
 
 @function_tool
-def book_appointment(doctor_name: str, day: str, patient_name: str, patient_phone: str) -> dict:
+def book_appointment(doctor_name: str, day: str, patient_name: str, patient_phone: str) -> str: # FIXED: Return type is now str
     """
     Books an appointment if the slot is available and saves it to a file.
-
-    Args:
-        doctor_name (str): The name of the doctor.
-        day (str): The requested day.
-        patient_name (str): The patient's name.
-        patient_phone (str): The patient's phone number.
-
-    Returns:
-        dict: A dictionary confirming the booking status and details.
+    Returns a confirmation or error message as a JSON string.
     """
     available_slot = check_availability(doctor_name, day)
+    
     if not available_slot:
-        return json.dumps({"success": False, "message": f"Dr. {doctor_name} is not available on {day}."})
+        result = {"success": False, "message": f"Dr. {doctor_name} is not available on {day}."}
+        return json.dumps(result) # FIXED: Return the dict as a JSON string
 
-    # Create the new booking record
     new_booking = {
         "patient_name": patient_name,
         "patient_phone": patient_phone,
@@ -148,19 +104,16 @@ def book_appointment(doctor_name: str, day: str, patient_name: str, patient_phon
         "clinic": available_slot['clinic']
     }
 
-    # Load existing bookings, add the new one, and save back to the file
     try:
         with open(BOOKINGS_FILE, 'r+') as f:
             bookings = json.load(f)
             bookings.append(new_booking)
-            f.seek(0) # Rewind file to the beginning
+            f.seek(0)
             json.dump(bookings, f, indent=4)
     except (FileNotFoundError, json.JSONDecodeError):
-        # If file doesn't exist or is empty, create it with the new booking
         with open(BOOKINGS_FILE, 'w') as f:
             json.dump([new_booking], f, indent=4)
     
-    # Simulate sending a confirmation SMS
     confirmation_message = (
         f"Your appointment with {new_booking['doctor_name']} is confirmed "
         f"for {new_booking['day']} at {new_booking['time']}. "
@@ -168,4 +121,5 @@ def book_appointment(doctor_name: str, day: str, patient_name: str, patient_phon
     )
     send_sms(patient_phone, confirmation_message)
 
-    return json.dumps({"success": True, "booking": new_booking})
+    result = {"success": True, "booking": new_booking}
+    return json.dumps(result) # FIXED: Return the success dict as a JSON string
