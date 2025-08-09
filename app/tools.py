@@ -6,13 +6,14 @@ import os
 
 # Define the base directory of the project
 # This makes our file paths work, no matter where we run the script from
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+# PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-# Define paths to our data files using this root
-SCHEDULE_FILE = PROJECT_ROOT / "data" / "full_hospital_schedule_with_specialty.json"
-BOOKINGS_FILE = PROJECT_ROOT / "data" / "bookings.json"
+# # Define paths to our data files using this root
+# SCHEDULE_FILE = PROJECT_ROOT / "data" / "full_hospital_schedule_with_specialty.json"
+# BOOKINGS_FILE = PROJECT_ROOT / "data" / "bookings.json"
 
-
+SCHEDULE_FILE = "full_hospital_schedule_with_specialty.json"
+BOOKINGS_FILE = "bookings.json"
 def load_schedule() -> list[dict]:
     """
     Loads the full hospital schedule from the JSON file.
