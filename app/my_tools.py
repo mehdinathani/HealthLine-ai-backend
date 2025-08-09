@@ -3,6 +3,7 @@
 import json
 from pathlib import Path
 import os
+from agents import function_tool
 
 # Define the base directory of the project
 # This makes our file paths work, no matter where we run the script from
@@ -14,6 +15,7 @@ import os
 
 SCHEDULE_FILE = "full_hospital_schedule_with_specialty.json"
 BOOKINGS_FILE = "bookings.json"
+
 def load_schedule() -> list[dict]:
     """
     Loads the full hospital schedule from the JSON file.
@@ -32,6 +34,7 @@ def load_schedule() -> list[dict]:
         print(f"Error: The schedule file at {SCHEDULE_FILE} is not a valid JSON.")
         return []
 
+@function_tool
 def find_doctor_by_name(doctor_name: str) -> list[dict]:
     """
     Finds all schedule entries for a doctor by their name, allowing for partial matches.
@@ -57,6 +60,7 @@ def find_doctor_by_name(doctor_name: str) -> list[dict]:
 
 # Add this to app/tools.py
 
+@function_tool
 def list_doctors_by_specialty(specialty: str) -> list[dict]:
     """
     Finds all doctors within a given specialty.
@@ -78,7 +82,7 @@ def list_doctors_by_specialty(specialty: str) -> list[dict]:
 
 
 # Add this to app/tools.py
-
+@function_tool
 def check_availability(doctor_name: str, day: str) -> dict | None:
     """
     Checks if a specific doctor is available on a specific day.
@@ -106,7 +110,6 @@ def check_availability(doctor_name: str, day: str) -> dict | None:
 
 
 # Add these two functions to app/tools.py
-
 def send_sms(phone: str, message: str):
     """
     Simulates sending an SMS by printing the message to the console.
@@ -117,7 +120,7 @@ def send_sms(phone: str, message: str):
     """
     print(f"[SMS to {phone}] {message}")
 
-
+@function_tool
 def book_appointment(doctor_name: str, day: str, patient_name: str, patient_phone: str) -> dict:
     """
     Books an appointment if the slot is available and saves it to a file.
