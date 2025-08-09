@@ -1,0 +1,1330 @@
+[
+  {
+    "specialty": "Consultant Physicians/Specialists Internal Medicine",
+    "doctor": "Prof. Dr. Sajid Abbas Jaffri",
+    "credentials": "MCPS, FCPS",
+    "days": [
+      "Tuesday",
+      "Thursday"
+    ],
+    "time": "08:30PM TO 09:30PM",
+    "clinic": "14"
+  },
+  {
+    "specialty": "Consultant Physicians/Specialists Internal Medicine",
+    "doctor": "Dr. Pyar Ali",
+    "credentials": "MCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "time": "12:00NOON TO 02:00PM",
+    "clinic": "13"
+  },
+  {
+    "specialty": "Consultant Physicians/Specialists Internal Medicine",
+    "doctor": "Dr. Huda Naim",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "08:30PM TO 09:30PM",
+    "clinic": "3"
+  },
+  {
+    "specialty": "Consultant Physicians/Specialists Internal Medicine",
+    "doctor": "Dr. Arjan Kumar",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "04:00PM TO 06:00PM",
+    "clinic": "2"
+  },
+  {
+    "specialty": "Consultant Physicians/Specialists Internal Medicine",
+    "doctor": "Dr. Tahira Naqvi",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "08:00PM TO 09:30PM",
+    "clinic": "13"
+  },
+  {
+    "specialty": "Consultant Physicians/Specialists Internal Medicine",
+    "doctor": "Dr. Tahira Naqvi",
+    "credentials": "FCPS",
+    "days": [
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "02:00PM TO 04:00PM",
+    "clinic": "10/6"
+  },
+  {
+    "specialty": "Chest Specialists",
+    "doctor": "Dr. Syed Ali Abbas",
+    "credentials": "CCT, MRCP, FRCP(UK)",
+    "days": [
+      "Monday",
+      "Wednesday"
+    ],
+    "time": "04:00PM TO 05:00PM",
+    "clinic": "02"
+  },
+  {
+    "specialty": "Chest Specialists",
+    "doctor": "Dr. Muhammad Umair",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "time": "05:00PM TO 06:00PM",
+    "clinic": "3/6"
+  },
+  {
+    "specialty": "Chest Specialists",
+    "doctor": "Dr. Ashfaque Ahmed",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "07:30PM TO 09:00PM",
+    "clinic": "10"
+  },
+  {
+    "specialty": "Adult Cardiologists",
+    "doctor": "Dr. Syed Hasnain Mujtaba",
+    "credentials": "FRCP (Lon), FRCP (Edin), MRCP (UK)",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "03:00PM TO 06:00PM",
+    "clinic": "NICVU"
+  },
+  {
+    "specialty": "Adult Cardiologists",
+    "doctor": "Dr. M. Tajuddin Patel",
+    "credentials": "MBBS, DIP CARD",
+    "days": [
+      "Tuesday",
+      "Thursday"
+    ],
+    "time": "12:00NOON TO 02:00PM",
+    "clinic": "10"
+  },
+  {
+    "specialty": "Adult Cardiologists",
+    "doctor": "Dr. Aijaz Ali Sheikh",
+    "credentials": "FCPS, CARDIO",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "08:00PM TO 09:00PM",
+    "clinic": "10/11"
+  },
+  {
+    "specialty": "Adult Cardiologists",
+    "doctor": "Dr. Zair Hussain",
+    "credentials": "D'CARD",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Saturday"
+    ],
+    "time": "12:00NOON TO 01:00PM",
+    "clinic": "NICVU"
+  },
+  {
+    "specialty": "Paediatric Cardiologist/Paediatric Echocardiogram",
+    "doctor": "Dr. Amber Kamran",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Wednesday"
+    ],
+    "time": "02:00PM TO 03:30PM",
+    "clinic": "ER WING"
+  },
+  {
+    "specialty": "Exercise Tolerance Test (ETT) & Stress Echocardiogram",
+    "doctor": "Dr. Syed Hasnain Mujtaba",
+    "credentials": "FRCP (Lon), FRCP (Edin), MRCP (UK)",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "By Appointment Only",
+    "clinic": "NICVU (EXT 105)"
+  },
+  {
+    "specialty": "Child Specialists",
+    "doctor": "Dr. Murtaza Ali Gova",
+    "credentials": "FCPS, Fellowship PCCM, MRCPCH (HOD)",
+    "days": [
+      "Saturday"
+    ],
+    "time": "ON LEAVE",
+    "clinic": "6"
+  },
+  {
+    "specialty": "Child Specialists",
+    "doctor": "Dr. Insiyah Agha",
+    "credentials": "MRCPCH",
+    "days": [
+      "Tuesday",
+      "Thursday"
+    ],
+    "time": "11:00AM TO 12:00NOON",
+    "clinic": "03"
+  },
+  {
+    "specialty": "Child Specialists",
+    "doctor": "Dr. Amin Ali",
+    "credentials": "FCPS, FELLOWSHIP NEONATOLOGY",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "08:00PM TO 09:00PM",
+    "clinic": "ER WING"
+  },
+  {
+    "specialty": "Child Specialists",
+    "doctor": "Dr. Sohail Sundrani",
+    "credentials": "DCH",
+    "days": [
+      "Tuesday",
+      "Thursday"
+    ],
+    "time": "04:30PM TO 05:30PM",
+    "clinic": "ER WING"
+  },
+  {
+    "specialty": "Child Specialists",
+    "doctor": "Dr. Samar Hassan",
+    "credentials": "MCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "11:30AM TO 01:30PM",
+    "clinic": "ER WING"
+  },
+  {
+    "specialty": "Child Specialists",
+    "doctor": "Dr. Hasnain Lokhandwala",
+    "credentials": "DCH",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "05:00PM TO 07:00PM",
+    "clinic": "ER WING"
+  },
+  {
+    "specialty": "Child Specialists",
+    "doctor": "Dr. Muhammad Hanif",
+    "credentials": "FCPS, Fellowship NEONATOLOGY",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "04:30PM TO 05:30PM",
+    "clinic": "11"
+  },
+  {
+    "specialty": "Child Specialists",
+    "doctor": "Dr. Gulab Rai",
+    "credentials": "MCPS",
+    "days": [
+      "Tuesday",
+      "Thursday"
+    ],
+    "time": "07:00PM TO 08:00PM",
+    "clinic": "10/11/13"
+  },
+  {
+    "specialty": "Paediatric Surgeons",
+    "doctor": "Dr. S. Mohd Rais Hussain",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday"
+    ],
+    "time": "06:00PM TO 07:00PM",
+    "clinic": "ER WING"
+  },
+  {
+    "specialty": "Paediatric Surgeons",
+    "doctor": "Dr. S. Mohd Rais Hussain",
+    "credentials": "FCPS",
+    "days": [
+      "Thursday"
+    ],
+    "time": "08:30PM TO 09:30PM",
+    "clinic": "ER WING"
+  },
+  {
+    "specialty": "Paediatric Surgeons",
+    "doctor": "Dr. Fatima Majid",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday",
+      "Thursday"
+    ],
+    "time": "04:00PM TO 05:00PM",
+    "clinic": "10"
+  },
+  {
+    "specialty": "Family Physicians",
+    "doctor": "Dr. Syed Rais Haider",
+    "credentials": "MCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "10:00AM TO 04:00PM",
+    "clinic": "FC"
+  },
+  {
+    "specialty": "Family Physicians",
+    "doctor": "Dr. Kamal Haider",
+    "credentials": "MBBS, DTCD",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Sunday"
+    ],
+    "time": "05:00PM TO 11:00PM",
+    "clinic": "ER WING"
+  },
+  {
+    "specialty": "Family Physicians",
+    "doctor": "Dr. Syed Ahmed Zamin Rizvi",
+    "credentials": "FCPS FAM. MED",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "03:00PM TO 05:00AM",
+    "clinic": "13"
+  },
+  {
+    "specialty": "Gynaecologists",
+    "doctor": "Dr. Farah Naz",
+    "credentials": "MRCOG, FRCOG",
+    "days": [
+      "Wednesday"
+    ],
+    "time": "10:30AM TO 12:00NOON",
+    "clinic": "03"
+  },
+  {
+    "specialty": "Gynaecologists",
+    "doctor": "Dr. Kaneez Fatima",
+    "credentials": "MCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "time": "10:00AM TO 01:00PM",
+    "clinic": "01"
+  },
+  {
+    "specialty": "Gynaecologists",
+    "doctor": "Dr. Raheela Mohsin",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Wednesday"
+    ],
+    "time": "12:00NOON TO 02:00PM",
+    "clinic": "04"
+  },
+  {
+    "specialty": "Gynaecologists",
+    "doctor": "Dr. Tahira Shah",
+    "credentials": "MCPS, FCPS",
+    "days": [
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "02:00PM TO 05:00PM",
+    "clinic": "01"
+  },
+  {
+    "specialty": "Gynaecologists",
+    "doctor": "Dr. Shahida Abbas",
+    "credentials": "MCPS, FCPS",
+    "days": [
+      "Monday",
+      "Friday"
+    ],
+    "time": "03:00PM TO 06:00PM",
+    "clinic": "06"
+  },
+  {
+    "specialty": "Gynaecologists",
+    "doctor": "Dr. Zeba Abbas",
+    "credentials": "MCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Friday"
+    ],
+    "time": "04:00PM TO 07:30PM",
+    "clinic": "01"
+  },
+  {
+    "specialty": "Gynaecologists",
+    "doctor": "Dr. Erum Bano",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "time": "08:00AM TO 04:00PM",
+    "clinic": "06"
+  },
+  {
+    "specialty": "General Surgeons",
+    "doctor": "Dr. Atia Hussain",
+    "credentials": "MCPS, FCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "time": "11:30AM TO 12:30PM",
+    "clinic": "OT"
+  },
+  {
+    "specialty": "General Surgeons",
+    "doctor": "Dr. Asad Ali Kerawala",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "03:00PM TO 04:00PM",
+    "clinic": "03"
+  },
+  {
+    "specialty": "General Surgeons",
+    "doctor": "Dr. Mohd Tayyab",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Saturday"
+    ],
+    "time": "04:00PM TO 08:00PM",
+    "clinic": "4/14/12"
+  },
+  {
+    "specialty": "General Surgeons",
+    "doctor": "Prof. Dr. Zia-ul-Islam",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "12:00NOON TO 01:00PM",
+    "clinic": "6"
+  },
+  {
+    "specialty": "Orthopaedic Surgeons",
+    "doctor": "Prof. Dr. Mehtab Ahmed Pirwani",
+    "credentials": "MS ORTHO",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "time": "12:00NOON TO 01:00PM",
+    "clinic": "02"
+  },
+  {
+    "specialty": "Orthopaedic Surgeons",
+    "doctor": "Dr. Mohd Farhan Sozera",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday",
+      "Saturday"
+    ],
+    "time": "04:30PM TO 06:00PM",
+    "clinic": "04"
+  },
+  {
+    "specialty": "Orthopaedic Surgeons",
+    "doctor": "Dr. Mohd Farhan Sozera",
+    "credentials": "FCPS",
+    "days": [
+      "Thursday"
+    ],
+    "time": "06:00PM TO 08:00PM",
+    "clinic": "04"
+  },
+  {
+    "specialty": "Orthopaedic Surgeons",
+    "doctor": "Dr. Syed Muhammad Sibtain",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Thursday"
+    ],
+    "time": "04:00PM TO 05:30PM",
+    "clinic": "11/13"
+  },
+  {
+    "specialty": "Orthopaedic Surgeons",
+    "doctor": "Dr. Muhammad Kazim Rahim",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday",
+      "Saturday"
+    ],
+    "time": "06:00PM TO 08:00PM",
+    "clinic": "04"
+  },
+  {
+    "specialty": "Orthopaedic Surgeons",
+    "doctor": "Dr. Ghulam Abbas Jaffri",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "08:00AM TO 04:00PM",
+    "clinic": "06"
+  },
+  {
+    "specialty": "Orthopaedic Surgeons",
+    "doctor": "Dr. Khadim Hussain",
+    "credentials": "FCPS",
+    "days": [
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "03:00PM TO 05:00PM",
+    "clinic": "04"
+  },
+  {
+    "specialty": "Diabetologists/Endocrinologists",
+    "doctor": "Dr. Ali Asghar",
+    "credentials": "MRCP, FACE, FRCP",
+    "days": [
+      "Tuesday",
+      "Saturday"
+    ],
+    "time": "05:30PM TO 07:00PM",
+    "clinic": "13"
+  },
+  {
+    "specialty": "Diabetologists/Endocrinologists",
+    "doctor": "Dr. Asad Abbas",
+    "credentials": "MS",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "07:00PM TO 09:00PM",
+    "clinic": "11"
+  },
+  {
+    "specialty": "Diabetologists/Endocrinologists",
+    "doctor": "Dr. Sabiha Bano",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "06:30PM TO 08:00PM",
+    "clinic": "10/11/13"
+  },
+  {
+    "specialty": "Diabetologists/Endocrinologists",
+    "doctor": "Dr. Sabiha Bano",
+    "credentials": "FCPS",
+    "days": [
+      "Friday"
+    ],
+    "time": "05:30PM TO 06:30PM",
+    "clinic": "10/11/13"
+  },
+  {
+    "specialty": "Dietician/Nutritionist",
+    "doctor": "Ms. Shabnam Razi",
+    "credentials": "MSC FOOD & NUTRITION",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "time": "12:30PM TO 01:30PM",
+    "clinic": "PRO ROOM"
+  },
+  {
+    "specialty": "Gastroenterologists",
+    "doctor": "Dr. Ghulamullah Lail",
+    "credentials": "FCPS, GASTRO.",
+    "days": [
+      "Tuesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "02:00PM TO 03:00PM",
+    "clinic": "12"
+  },
+  {
+    "specialty": "Gastroenterologists",
+    "doctor": "Dr. Tanveer Khalid",
+    "credentials": "FCPS, GASTRO.",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "06:00PM TO 07:00PM",
+    "clinic": "13"
+  },
+  {
+    "specialty": "Gastroenterologists",
+    "doctor": "Dr. Farheen Taufiq",
+    "credentials": "FCPS, GASTRO.",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Saturday"
+    ],
+    "time": "ON LEAVE 23RD AUG TILL DATE",
+    "clinic": "13, 03"
+  },
+  {
+    "specialty": "Gastroenterologists",
+    "doctor": "Dr. Imran Khan",
+    "credentials": "FCPS, GASTRO.",
+    "days": [
+      "Tuesday",
+      "Thursday",
+      "Friday"
+    ],
+    "time": "08:00PM TO 09:00PM",
+    "clinic": "02"
+  },
+  {
+    "specialty": "Psychiatrists",
+    "doctor": "Prof. Dr. Syed Zafar Haider",
+    "credentials": "FCPS",
+    "days": [],
+    "time": "ON LEAVE",
+    "clinic": "ON LEAVE"
+  },
+  {
+    "specialty": "Psychiatrists",
+    "doctor": "Dr. Muhammad Ilyas",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday",
+      "Thursday"
+    ],
+    "time": "07:00PM TO 08:00PM",
+    "clinic": "11"
+  },
+  {
+    "specialty": "Neuro Physicians",
+    "doctor": "Dr. Teerth Das",
+    "credentials": "MCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "time": "07:00PM TO 09:00PM",
+    "clinic": "03"
+  },
+  {
+    "specialty": "Neuro Physicians",
+    "doctor": "Dr. Roohi Baqir",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "04:00PM TO 05:30PM",
+    "clinic": "11"
+  },
+  {
+    "specialty": "Neuro Surgeons",
+    "doctor": "Prof. Dr. Syed Raza Rizvi",
+    "credentials": "FRCS, MS",
+    "days": [
+      "Monday"
+    ],
+    "time": "05:30PM TO 06:30PM",
+    "clinic": "11/10"
+  },
+  {
+    "specialty": "Neuro Surgeons",
+    "doctor": "Dr. Zeeshan Mughal",
+    "credentials": "MBBS, FCPS (Neurology), FRCS (Endin Burgh)",
+    "days": [
+      "Tuesday",
+      "Friday"
+    ],
+    "time": "04:30PM TO 05:30PM",
+    "clinic": "3/12"
+  },
+  {
+    "specialty": "Neuro Surgeons",
+    "doctor": "Dr. Ghulam Mohd Brohi",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday",
+      "Wednesday"
+    ],
+    "time": "07:00PM TO 08:30PM",
+    "clinic": "5/2"
+  },
+  {
+    "specialty": "Nephrologists",
+    "doctor": "Dr. Ali Mohsin Raza",
+    "credentials": "MD, FACN",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Saturday"
+    ],
+    "time": "04:00PM TO 06:00PM",
+    "clinic": "10"
+  },
+  {
+    "specialty": "Nephrologists",
+    "doctor": "Dr. Ali Mohsin Raza",
+    "credentials": "MD, FACN",
+    "days": [
+      "Thursday"
+    ],
+    "time": "06:00PM TO 07:00PM",
+    "clinic": "10"
+  },
+  {
+    "specialty": "Nephrologists",
+    "doctor": "Dr. Mehdi Hussain Nayani",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday"
+    ],
+    "time": "08:30AM TO 09:45AM",
+    "clinic": "13"
+  },
+  {
+    "specialty": "Skin Specialists",
+    "doctor": "Dr. Jawed Ahmed Memon",
+    "credentials": "MCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "06:30PM TO 07:30PM",
+    "clinic": "14"
+  },
+  {
+    "specialty": "Skin Specialists",
+    "doctor": "Dr. Farina Zameer",
+    "credentials": "MCPS",
+    "days": [
+      "Tuesday"
+    ],
+    "time": "03:00PM TO 04:30PM",
+    "clinic": "14"
+  },
+  {
+    "specialty": "Skin Specialists",
+    "doctor": "Dr. Kanwal Kaukab",
+    "credentials": "MCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "12:00NOON TO 03:00PM",
+    "clinic": "14"
+  },
+  {
+    "specialty": "Eye Specialists",
+    "doctor": "Dr. Maqbool Hussain",
+    "credentials": "DOMS",
+    "days": [
+      "Wednesday"
+    ],
+    "time": "08:00PM TO 09:00PM",
+    "clinic": "15"
+  },
+  {
+    "specialty": "Eye Specialists",
+    "doctor": "Dr. Narain Das",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday",
+      "Saturday"
+    ],
+    "time": "05:00PM TO 06:30PM",
+    "clinic": "15"
+  },
+  {
+    "specialty": "ENT Specialists",
+    "doctor": "Dr. Anis A. Allana",
+    "credentials": "DLO",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "11:30AM TO 01:30PM",
+    "clinic": "12"
+  },
+  {
+    "specialty": "ENT Specialists",
+    "doctor": "Dr. Maisam Abbas",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday"
+    ],
+    "time": "04:00PM TO 05:30PM",
+    "clinic": "12"
+  },
+  {
+    "specialty": "ENT Specialists",
+    "doctor": "Dr. Maheen Pyar Ali",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Thursday"
+    ],
+    "time": "05:30PM TO 07:00PM",
+    "clinic": "12"
+  },
+  {
+    "specialty": "ENT Specialists",
+    "doctor": "Dr. Hassan Abbas",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "08:00PM TO 09:00PM",
+    "clinic": "12"
+  },
+  {
+    "specialty": "ENT Specialists",
+    "doctor": "Dr. Syeda Amna Bukhari",
+    "credentials": "DLO, FCPS",
+    "days": [
+      "Tuesday",
+      "Friday"
+    ],
+    "time": "06:00PM TO 07:00PM",
+    "clinic": "12, 12"
+  },
+  {
+    "specialty": "ENT Specialists",
+    "doctor": "Dr. Shahid Raza Syed",
+    "credentials": "DLO, MCPS, FRCS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "09:30AM TO 11:00AM",
+    "clinic": "12"
+  },
+  {
+    "specialty": "Urologists",
+    "doctor": "Dr. Yasir Murtaza",
+    "credentials": "FCPS",
+    "days": [
+      "Wednesday",
+      "Saturday"
+    ],
+    "time": "06:00PM TO 07:00PM",
+    "clinic": "3/4"
+  },
+  {
+    "specialty": "Urologists",
+    "doctor": "Dr. Sunil Kumar",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Thursday",
+      "Friday"
+    ],
+    "time": "02:00PM TO 03:00PM",
+    "clinic": "10/11"
+  },
+  {
+    "specialty": "Plastic Surgeons",
+    "doctor": "Dr. Atia Hussain",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "time": "11:30AM TO 12:30PM",
+    "clinic": "OT"
+  },
+  {
+    "specialty": "Plastic Surgeons",
+    "doctor": "Dr. Erum Naz",
+    "credentials": "FCPS",
+    "days": [
+      "Tuesday",
+      "Saturday"
+    ],
+    "time": "12:30PM TO 01:30PM",
+    "clinic": "03"
+  },
+  {
+    "specialty": "Dentists",
+    "doctor": "Dr. Mahwish Zehra",
+    "credentials": "BDS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "10:00AM TO 01:00PM",
+    "clinic": "DENTAL CLINIC 07"
+  },
+  {
+    "specialty": "Dentists",
+    "doctor": "Dr. Imtiaz Ul Haq",
+    "credentials": "BDS (MALE DENTIST)",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "06:00PM TO 10:00PM",
+    "clinic": "DENTAL CLINIC 07"
+  },
+  {
+    "specialty": "Dentists",
+    "doctor": "Dr. Urooj Fatima",
+    "credentials": "BDS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "09:00AM TO 03:00PM",
+    "clinic": "DENTAL CLINIC 07"
+  },
+  {
+    "specialty": "Facio-Maxillary Surgeons",
+    "doctor": "Dr. Zia Abbas",
+    "credentials": "BDS, MCPS, MDS",
+    "days": [
+      "Thursday"
+    ],
+    "time": "02:00PM TO 04:00PM",
+    "clinic": "DENTAL CLINIC 07"
+  },
+  {
+    "specialty": "Facio-Maxillary Surgeons",
+    "doctor": "Dr. Raza Ali",
+    "credentials": "BDS, MSc",
+    "days": [
+      "Friday"
+    ],
+    "time": "06:00PM TO 07:00PM",
+    "clinic": "DENTAL CLINIC 07"
+  },
+  {
+    "specialty": "Facio-Maxillary Surgeons",
+    "doctor": "Dr. Abdullah Salman",
+    "credentials": "FCPS",
+    "days": [
+      "Wednesday"
+    ],
+    "time": "06:00PM TO 07:00PM",
+    "clinic": "DENTAL CLINIC 07"
+  },
+  {
+    "specialty": "Facio-Maxillary Surgeons",
+    "doctor": "Dr. Maria Shabbir",
+    "credentials": "FCPS",
+    "days": [
+      "Monday"
+    ],
+    "time": "06:00PM TO 07:00PM, ON CALL",
+    "clinic": "DENTAL CLINIC 07"
+  },
+  {
+    "specialty": "Anaesthesia Clinic",
+    "doctor": "Dr. Sibte Arif Naqvi",
+    "credentials": "MCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "12:00NOON TO 01:00PM",
+    "clinic": "OT"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Hassan Abbas",
+    "credentials": "MAIUM",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "06:30PM TO 07:30PM",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Ghulam Abbas",
+    "credentials": "ARDMS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday",
+      "Friday"
+    ],
+    "time": "10:00AM TO 01:00PM",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Atia Fareen",
+    "credentials": "MAIUM",
+    "days": [
+      "Tuesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "05:30PM TO 07:30PM",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Saadia Gulzar",
+    "credentials": "ARDMS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday"
+    ],
+    "time": "09:00AM TO 11:00AM",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Zahida Parveen",
+    "credentials": "MAIUM",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "05:00PM TO 07:00PM",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Zahida Parveen",
+    "credentials": "MAIUM",
+    "days": [
+      "Saturday"
+    ],
+    "time": "01:00PM TO 03:00PM",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Nasrin Haque",
+    "credentials": "ARDMS",
+    "days": [
+      "Tuesday",
+      "Wednesday",
+      "Thursday"
+    ],
+    "time": "11:00AM TO 01:30PM",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Shama Zehra",
+    "credentials": "MAIUM",
+    "days": [
+      "Monday",
+      "Friday"
+    ],
+    "time": "12:00NOON TO 01:30PM",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Shama Zehra",
+    "credentials": "MAIUM",
+    "days": [
+      "Saturday"
+    ],
+    "time": "10:00AM TO 01:00PM",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Devi Bai",
+    "credentials": "MAIUM",
+    "days": [
+      "Monday"
+    ],
+    "time": "11:00AM TO 12:00NOON",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologists/Sonologists",
+    "doctor": "Dr. Devi Bai",
+    "credentials": "MAIUM",
+    "days": [
+      "Friday"
+    ],
+    "time": "09:00AM TO 11:00AM",
+    "clinic": "ULTRA SOUND"
+  },
+  {
+    "specialty": "Radiologist (CT Scan)",
+    "doctor": "Dr. Vickey Kumar",
+    "credentials": "FCPS",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "time": "03:00PM TO 05:00PM",
+    "clinic": "BASEMENT"
+  },
+  {
+    "specialty": "Physiotherapy",
+    "doctor": "Ms. Asma Batool",
+    "credentials": "MBA, BSPT (HOD)",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "time": "08:00AM TO 02:00PM",
+    "clinic": "PHYSIO THERAPY"
+  },
+  {
+    "specialty": "Physiotherapy",
+    "doctor": "Ms. Aeliya Hussain",
+    "credentials": "DPT",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "08:00AM TO 02:00PM",
+    "clinic": "PHYSIO THERAPY"
+  },
+  {
+    "specialty": "Physiotherapy",
+    "doctor": "Ms. Eraj Fatima",
+    "credentials": "DPT",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "02:00PM TO 08:00PM",
+    "clinic": "PHYSIO THERAPY"
+  },
+  {
+    "specialty": "Physiotherapy",
+    "doctor": "Mr. Hammadullah",
+    "credentials": "DPT",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "03:00PM TO 09:00PM",
+    "clinic": "PHYSIO THERAPY"
+  },
+  {
+    "specialty": "Oncologist",
+    "doctor": "Dr. Furrukh Ashraf",
+    "credentials": "MD",
+    "days": [
+      "Monday",
+      "Wednesday"
+    ],
+    "time": "06:00PM TO 07:00PM",
+    "clinic": "02"
+  },
+  {
+    "specialty": "Adult Echocardiography",
+    "doctor": "Dr. Syed Hasnain Mujtaba",
+    "credentials": "MRCP UK",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "03:00PM TO 06:00PM",
+    "clinic": "NICVU"
+  },
+  {
+    "specialty": "Adult Echocardiography",
+    "doctor": "Dr. Aijaz Ali Shaikh",
+    "credentials": "FCPS, Cardio",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "time": "08:00PM TO 09:00PM",
+    "clinic": "NICVU"
+  },
+  {
+    "specialty": "Adult Echocardiography",
+    "doctor": "Ms. Mary Dilber",
+    "credentials": "Cardiac Sonographer",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "time": "08:00AM TO 04:00PM",
+    "clinic": "NICVU"
+  },
+  {
+    "specialty": "Filter Eye Clinic",
+    "doctor": "Dr. Tahira Zulfiqar",
+    "credentials": "MEDICAL OPHTHALMOLOGIST",
+    "days": [
+      "Monday",
+      "Wednesday",
+      "Thursday"
+    ],
+    "time": "10:30PM TO 12:30PM",
+    "clinic": "15"
+  }
+]
