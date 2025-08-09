@@ -56,7 +56,7 @@ def find_doctor_by_name(doctor_name: str) -> list[dict]:
         entry for entry in schedule
         if search_term in entry['doctor'].lower()
     ]
-    return matching_doctors
+    return json.dump(matching_doctors)
 
 # Add this to app/tools.py
 
@@ -82,7 +82,6 @@ def list_doctors_by_specialty(specialty: str) -> list[dict]:
 
 
 # Add this to app/tools.py
-@function_tool
 def check_availability(doctor_name: str, day: str) -> dict | None:
     """
     Checks if a specific doctor is available on a specific day.
@@ -135,9 +134,8 @@ def book_appointment(doctor_name: str, day: str, patient_name: str, patient_phon
         dict: A dictionary confirming the booking status and details.
     """
     available_slot = check_availability(doctor_name, day)
-    
     if not available_slot:
-        return {"success": False, "message": f"Dr. {doctor_name} is not available on {day}."}
+        return json.dumps({"success": False, "message": f"Dr. {doctor_name} is not available on {day}."})
 
     # Create the new booking record
     new_booking = {
@@ -170,4 +168,4 @@ def book_appointment(doctor_name: str, day: str, patient_name: str, patient_phon
     )
     send_sms(patient_phone, confirmation_message)
 
-    return {"success": True, "booking": new_booking}
+    return json.dumps({"success": True, "booking": new_booking})
