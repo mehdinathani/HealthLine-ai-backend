@@ -7,5 +7,14 @@
         "day": "Tuesday",
         "time": "08:30AM TO 09:45AM",
         "clinic": "13"
+    },
+    {
+        "patient_name": "ali abbas",
+        "patient_phone": "03434242",
+        "doctor_name": "Dr. Mehdi Hussain Nayani",
+        "specialty": "Nephrologists",
+        "day": "Tuesday",
+        "time": "08:30AM TO 09:45AM",
+        "clinic": "13"
     }
 ]
