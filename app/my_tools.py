@@ -10,7 +10,8 @@ SCHEDULE_FILE = "full_hospital_schedule_with_specialty.json"
 BOOKINGS_FILE = "bookings.json"
 
 # --- Helper Function (This part is correct) ---
-def load_schedule() -> list[dict]:
+def load_schedule():
+    print("Load Schedule tool called")
     """Loads the full hospital schedule from the JSON file."""
     try:
         with open(SCHEDULE_FILE, 'r') as f:
@@ -58,7 +59,7 @@ def list_doctors_by_specialty(specialty: str) -> str: # FIXED: Return type is no
 
 # --- Helper Functions (Not tools for the agent) ---
 
-def check_availability(doctor_name: str, day: str) -> Optional[dict]:
+def check_availability(doctor_name: str, day: str):
     """
     Internal helper function to check availability. Not a tool for the agent.
     """

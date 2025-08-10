@@ -1,7 +1,7 @@
 # test_tools.py
 
 import json
-from app import tools
+from app import my_tools
 
 def pretty_print(data):
     """Helper function to print data in a readable format."""
@@ -38,18 +38,18 @@ def run_test_cli():
         try:
             if command == 'find' and len(args) >= 1:
                 doctor_name = " ".join(args)
-                result = tools.find_doctor_by_name(doctor_name)
+                result = my_tools.find_doctor_by_name(doctor_name)
                 pretty_print(result)
 
             elif command == 'list' and len(args) >= 1:
                 specialty = " ".join(args)
-                result = tools.list_doctors_by_specialty(specialty)
+                result = my_tools.list_doctors_by_specialty(specialty)
                 pretty_print(result)
 
             elif command == 'check' and len(args) >= 2:
                 doctor_name = args[0]
                 day = args[1]
-                result = tools.check_availability(doctor_name, day)
+                result = my_tools.check_availability(doctor_name, day)
                 if result:
                     pretty_print(result)
                 else:
@@ -60,7 +60,7 @@ def run_test_cli():
                 day = args[1]
                 patient_name = args[2] # In a real app, you might need quotes for names with spaces
                 phone = args[3]
-                result = tools.book_appointment(doctor_name, day, patient_name, phone)
+                result = my_tools.book_appointment(doctor_name, day, patient_name, phone)
                 pretty_print(result)
                 
             else:
