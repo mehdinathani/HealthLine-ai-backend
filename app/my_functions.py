@@ -68,21 +68,30 @@ BOOKINGS_FILE = "bookings.json"
 
 def _internal_find_doctor(doctor_name: str, schedule: list) -> list:
     """
-    Internal-only function for finding a doctor. Not a tool for the agent.
-    This contains the robust search logic.
+    Upgraded internal function for finding a doctor using word set matching.
     """
     if not doctor_name:
         return []
     
-    search_term = doctor_name.lower().replace('dr.', '').replace('dr', '').replace('prof', '').strip()
+    # Clean and split the search query into a set of words
+    search_words = set(doctor_name.lower().replace('dr.', '').replace('dr', '').replace('prof', '').strip().split())
     
     matching_doctors = []
     for entry in schedule:
-        schedule_doc_name = entry['doctor'].lower().replace('dr.', '').replace('dr', '').replace('prof', '').strip()
-        if search_term in schedule_doc_name:
+        doc_name_from_schedule = entry.get('doctor', '')
+        if not doc_name_from_schedule:
+            continue
+        
+        # Clean and split the doctor's name from the schedule into a set of words
+        schedule_name_words = set(doc_name_from_schedule.lower().replace('dr.', '').replace('dr', '').replace('prof', '').strip().split())
+        
+        # Check if all search words are present in the doctor's name
+        if search_words.issubset(schedule_name_words):
             matching_doctors.append(entry)
             
-    return matching_doctors
+    # De-duplicate the results based on the doctor's name
+    unique_doctors = {doc['doctor']: doc for doc in matching_doctors}.values()
+    return list(unique_doctors)
 
 # (add this function near your other load functions)
 

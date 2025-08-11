@@ -42,5 +42,16 @@
         "booking_date": "2025-08-12",
         "booking_time": "08:30AM",
         "clinic": "13"
+    },
+    {
+        "appointment_id": "6c6438f1-9bfa-4e55-9a18-0350df0953e5",
+        "token_number": 1,
+        "patient_name": "Kako",
+        "patient_phone": "242342",
+        "doctor_name": "Dr. Arjan Kumar",
+        "specialty": "Consultant Physicians/Specialists Internal Medicine",
+        "booking_date": "2025-08-12",
+        "booking_time": "04:00PM",
+        "clinic": "2"
     }
 ]

@@ -17,76 +17,93 @@ ABSENTS_FILE = "dr_absents.json"
 
 
 @function_tool
-def get_available_slots(doctor_name: str) -> str:
+def get_available_slots(
+    doctor_name: str = None, 
+    specialty: str = None, 
+    day_of_week: str = None
+) -> str:
     """
-    Calculates the true, available appointment slots for a specific doctor
-    for the next 14 days, considering their schedule, absences, and existing bookings.
-    Only 20 appointments per doctor per day are allowed.
+    Calculates available appointment slots based on a flexible search.
+    Can filter by doctor name, specialty, and/or a specific day of the week for the next 14 days.
     """
-    print(f"[TOOL-DEBUG] Getting available slots for: {doctor_name}")
+    # The rest of the function body is PERFECT and does not need to change.
+    print(f"[TOOL-DEBUG] Advanced search for: Dr={doctor_name}, Spec={specialty}, Day={day_of_week}")
     
-    # 1. Load all necessary data
-    schedule = load_schedule()
+    # 1. Start with the full schedule and apply filters
+    candidate_schedules = load_schedule()
+
+    if specialty:
+        candidate_schedules = [s for s in candidate_schedules if specialty.lower() in s.get('specialty', '').lower()]
+    
+    if doctor_name:
+        candidate_schedules = _internal_find_doctor(doctor_name, candidate_schedules)
+
+    if not candidate_schedules:
+        return json.dumps({"success": True, "slots": []})
+
+    # 2. Load absences and all current bookings
     absences = load_absences()
     try:
-        with open(BOOKINGS_FILE, 'r') as f:
-            all_bookings = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        all_bookings = []
+        with open(BOOKINGS_FILE, 'r') as f: all_bookings = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError): all_bookings = []
 
-    # 2. Find the specific doctor's base schedule
-    doctor_schedules = _internal_find_doctor(doctor_name, schedule)
-    if not doctor_schedules:
-        return json.dumps({"success": False, "message": "Doctor not found."})
-
-    # 3. Get doctor's specific absences
-    doctor_absent_dates = absences.get(doctor_schedules[0]['doctor'], [])
-
-    # 4. Generate the next 14 days and check each one
+    # 3. Check availability over the next 14 days
     available_slots = []
     today = datetime.now()
-    
-    for i in range(14): # Check for the next 14 days
+    for i in range(14):
         check_date = today + timedelta(days=i)
-        check_date_str = check_date.strftime("%Y-%m-%d") # Format: "2025-08-20"
-        day_of_week = check_date.strftime("%A") # Format: "Tuesday"
+        check_date_str = check_date.strftime("%Y-%m-%d")
+        current_day_of_week = check_date.strftime("%A")
 
-        # Is the doctor absent on this specific date?
-        if check_date_str in doctor_absent_dates:
-            continue # Skip to the next day
+        if day_of_week and day_of_week.lower() not in current_day_of_week.lower():
+            continue
 
-        # Does the doctor work on this day of the week?
-        for schedule_entry in doctor_schedules:
-            if day_of_week in schedule_entry['days']:
-                # Count existing bookings for this doctor on this date
-                bookings_on_date = [
-                    b for b in all_bookings 
-                    if b.get('doctor_name') == schedule_entry['doctor'] and b.get('booking_date') == check_date_str
-                ]
-                
-                # Check if the slot is full (as per the 20 patient policy)
+        for schedule_entry in candidate_schedules:
+            doc_full_name = schedule_entry.get('doctor', '')
+            if not doc_full_name: continue
+
+            doctor_absent_dates = absences.get(doc_full_name, [])
+            if check_date_str in doctor_absent_dates:
+                continue
+
+            if "on leave" in schedule_entry.get('time', '').lower():
+                continue # Skip this slot entirely if the doctor is on leave
+            # --- END OF ADDED BLOCK ---
+
+            if current_day_of_week in schedule_entry.get('days', []):
+                bookings_on_date = [b for b in all_bookings if b.get('doctor_name') == doc_full_name and b.get('booking_date') == check_date_str]
                 if len(bookings_on_date) < 20:
                     available_slots.append({
+                        "doctor": doc_full_name,
                         "date": check_date_str,
-                        "day": day_of_week,
-                        "time": schedule_entry['time'],
-                        "clinic": schedule_entry['clinic'],
-                        "available_spots": 20 - len(bookings_on_date)
+                        "day": current_day_of_week,
+                        "time": schedule_entry.get('time', 'N/A'),
+                        "clinic": schedule_entry.get('clinic', 'N/A'),
                     })
-
+    
     return json.dumps({"success": True, "slots": available_slots})
+
 
 @function_tool
 def find_doctor_by_name(doctor_name: str) -> str:
     """
-    Finds schedule entries for a doctor. Returns a JSON string.
+    Finds doctors by name and returns a simplified list of their names and specialties.
     """
     print("Find Doctor tool called")
     schedule = load_schedule()
-    # It now calls our simple, internal function
     matching_doctors = _internal_find_doctor(doctor_name, schedule)
-    return json.dumps(matching_doctors)
 
+    # --- THIS IS THE KEY CHANGE ---
+    # Instead of returning everything, create a clean, simple list.
+    simplified_results = [
+        {
+            "doctor": doc.get('doctor', 'N/A'),
+            "specialty": doc.get('specialty', 'N/A')
+        } 
+        for doc in matching_doctors
+    ]
+    
+    return json.dumps(simplified_results)
 
 @function_tool
 def list_doctors_by_specialty(specialty: str) -> str: # FIXED: Return type is now str
@@ -173,12 +190,17 @@ def book_appointment(doctor_name: str, booking_date: str, booking_time: str, pat
 
     # 5. Simulate SMS Confirmation
     confirmation_message = (
-        f"Appointment Confirmed! Your appointment with {doctor_name} is on "
+        f"Appointment Confirmed! Appt ID: {new_booking['appointment_id']}. "  # <-- ADDED Appt ID
+        f"Your appointment with {doctor_name} is on "
         f"{booking_date} at {booking_time}. Your token number is {token_number}. "
         f"Please arrive at clinic {clinic}."
     )
     send_sms(patient_phone, confirmation_message)
 
-    return json.dumps({"success": True, "booking": new_booking})
+    return json.dumps({
+        "success": True, 
+        "booking": new_booking,
+        "message": f"The booking is confirmed. The appointment ID is {new_booking['appointment_id']} and the token number is {token_number}." # <-- New helpful message
+    })
 
 
