@@ -22,17 +22,6 @@
         "clinic": "6"
     },
     {
-        "appointment_id": "1ce054b2-7749-4f65-a5a7-c5383f88c138",
-        "token_number": 1,
-        "patient_name": "Kakk",
-        "patient_phone": "03131",
-        "doctor_name": "Mehdi Hussain Nayani",
-        "specialty": "Nephrologists",
-        "booking_date": "2025-08-12",
-        "booking_time": "08:30AM",
-        "clinic": "13"
-    },
-    {
         "appointment_id": "9343b403-10b5-4401-8b8f-47407ea8cedf",
         "token_number": 2,
         "patient_name": "Kaka",
@@ -42,16 +31,5 @@
         "booking_date": "2025-08-12",
         "booking_time": "08:30AM",
         "clinic": "13"
-    },
-    {
-        "appointment_id": "6c6438f1-9bfa-4e55-9a18-0350df0953e5",
-        "token_number": 1,
-        "patient_name": "Kako",
-        "patient_phone": "242342",
-        "doctor_name": "Dr. Arjan Kumar",
-        "specialty": "Consultant Physicians/Specialists Internal Medicine",
-        "booking_date": "2025-08-12",
-        "booking_time": "04:00PM",
-        "clinic": "2"
     }
 ]

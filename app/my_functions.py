@@ -105,3 +105,45 @@ def load_absences() -> dict:
         # If file is missing or invalid, assume no one is absent.
         return {}
     return {}
+
+# In app/my_functions.py
+
+def _internal_cancel_booking(appointment_id: str) -> bool:
+    """
+    Finds a booking by its unique appointment_id and removes it.
+    Returns True if successful, False otherwise.
+    """
+    all_bookings = load_bookings()
+    
+    # Find the booking to remove
+    booking_to_remove = None
+    for booking in all_bookings:
+        if booking.get('appointment_id') == appointment_id:
+            booking_to_remove = booking
+            break
+            
+    if not booking_to_remove:
+        return False # Booking ID not found
+
+    # Remove the booking and write the file back
+    all_bookings.remove(booking_to_remove)
+    try:
+        with open(BOOKINGS_FILE, 'w') as f:
+            json.dump(all_bookings, f, indent=4)
+        return True # Success
+    except Exception as e:
+        print(f"Error writing bookings file during cancellation: {e}")
+        return False # Failed to write file
+    
+def load_bookings() -> list:
+    """Loads all current bookings from the JSON file."""
+    try:
+        # We need to reference the file path defined in this file
+        with open(BOOKINGS_FILE, 'r') as f:
+            # Handle empty file case
+            content = f.read()
+            if content:
+                return json.loads(content)
+            return []
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []

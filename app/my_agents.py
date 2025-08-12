@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from agents import Agent
-from .my_tools import find_doctor_by_name, list_doctors_by_specialty, get_available_slots, book_appointment # <-- We will add get_available_slots soon
+from .my_tools import find_doctor_by_name, list_doctors_by_specialty, get_available_slots, book_appointment, find_booking_by_details, cancel_appointment # <-- We will add get_available_slots soon
 
 # --- New, Smarter Instructions ---
 # In app/my_agents.py
@@ -31,10 +31,19 @@ You are a specialized hospital receptionist agent. Your ONLY purpose is to inter
     - To book, you MUST have all five pieces of information: `doctor_name`, `booking_date`, `booking_time`, `patient_name`, and `patient_phone`.
     - Ask for any missing information, then repeat all five details back for a final confirmation.
     - Only after the user confirms, call the `book_appointment` tool.
-"""
+
+ 4. CANCELLATION / EDITING WORKFLOW:
+    - If the user wants to cancel or edit an appointment, first ask for their phone number or appointment ID.
+    - Use the `find_booking_by_details` tool to find their appointment(s).
+    - If you find one or more appointments, list them clearly for the user (Doctor, Date, Time, Appointment ID).
+    - Ask the user to confirm the **Appointment ID** of the one they wish to cancel.
+    - **CRITICAL CANCELLATION RULE:** Once the user confirms the ID, you **MUST** call the `cancel_appointment` tool with that exact ID. You are forbidden from confirming the cancellation until the `cancel_appointment` tool returns a success message.
+    - After the tool returns success, inform the user that the cancellation was successful.
+    - To "edit" an appointment, instruct the user that they should first cancel the old one and then book a new one.
+    """
 
 master_agent = Agent(
     name="MasterAgent",
     instructions=MASTER_AGENT_INSTRUCTIONS,
-    tools=[find_doctor_by_name, list_doctors_by_specialty, get_available_slots, book_appointment] # <-- We will create the new tool next
+    tools=[find_doctor_by_name, list_doctors_by_specialty, get_available_slots, book_appointment, find_booking_by_details, cancel_appointment] # <-- We will create the new tool next
 )

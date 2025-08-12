@@ -6,7 +6,7 @@ from typing import Optional
 import os # <--- ADD THIS LINE
 from datetime import datetime, timedelta
 import uuid # <--- ADD THIS FINAL IMPORT
-from .my_functions import load_schedule, load_absences, _internal_find_doctor,send_sms
+from .my_functions import load_bookings, load_schedule, load_absences, _internal_find_doctor,send_sms, _internal_cancel_booking
 
 
 
@@ -204,3 +204,36 @@ def book_appointment(doctor_name: str, booking_date: str, booking_time: str, pat
     })
 
 
+@function_tool
+def find_booking_by_details(patient_phone: str = None, appointment_id: str = None) -> str:
+    """
+    Finds existing bookings using either the patient's phone number or the unique appointment ID.
+    """
+    # The rest of the function body is PERFECT and does not need to change.
+    if not patient_phone and not appointment_id:
+        return json.dumps({"success": False, "message": "You must provide either a phone number or an appointment ID."})
+
+    all_bookings = load_bookings()
+    
+    found_bookings = []
+    if appointment_id:
+        found_bookings = [b for b in all_bookings if b.get('appointment_id') == appointment_id]
+    elif patient_phone:
+        found_bookings = [b for b in all_bookings if b.get('patient_phone') == patient_phone]
+        
+    return json.dumps({"success": True, "bookings": found_bookings})
+
+
+@function_tool
+def cancel_appointment(appointment_id: str) -> str:
+    """
+    Cancels an appointment using its unique appointment_id.
+    """
+    print(f"[TOOL-DEBUG] Attempting to cancel appointment ID: {appointment_id}")
+    
+    success = _internal_cancel_booking(appointment_id)
+    
+    if success:
+        return json.dumps({"success": True, "message": f"Successfully cancelled appointment {appointment_id}."})
+    else:
+        return json.dumps({"success": False, "message": f"Failed to cancel appointment {appointment_id}. The ID may not exist."})
