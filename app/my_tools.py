@@ -205,22 +205,23 @@ def book_appointment(doctor_name: str, booking_date: str, booking_time: str, pat
 
 
 @function_tool
-def find_booking_by_details(patient_phone: str = None, appointment_id: str = None) -> str:
+def find_booking_by_phone(phone_number: str) -> str:
     """
-    Finds existing bookings using either the patient's phone number or the unique appointment ID.
+    Finds existing bookings using ONLY the patient's phone number.
     """
-    # The rest of the function body is PERFECT and does not need to change.
-    if not patient_phone and not appointment_id:
-        return json.dumps({"success": False, "message": "You must provide either a phone number or an appointment ID."})
-
+    print(f"[TOOL-DEBUG] Finding bookings for phone: {phone_number}")
     all_bookings = load_bookings()
-    
-    found_bookings = []
-    if appointment_id:
-        found_bookings = [b for b in all_bookings if b.get('appointment_id') == appointment_id]
-    elif patient_phone:
-        found_bookings = [b for b in all_bookings if b.get('patient_phone') == patient_phone]
-        
+    found_bookings = [b for b in all_bookings if b.get('patient_phone') == phone_number]
+    return json.dumps({"success": True, "bookings": found_bookings})
+
+@function_tool
+def find_booking_by_id(appointment_id: str) -> str:
+    """
+    Finds an existing booking using ONLY the unique appointment ID.
+    """
+    print(f"[TOOL-DEBUG] Finding booking for ID: {appointment_id}")
+    all_bookings = load_bookings()
+    found_bookings = [b for b in all_bookings if b.get('appointment_id') == appointment_id]
     return json.dumps({"success": True, "bookings": found_bookings})
 
 

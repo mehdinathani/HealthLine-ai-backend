@@ -1,16 +1,5 @@
 [
     {
-        "appointment_id": "08e8df01-1556-4319-9712-10ef07eb3971",
-        "token_number": 1,
-        "patient_name": "Kaka",
-        "patient_phone": "23131",
-        "doctor_name": "Mehdi Hussain Nayani",
-        "specialty": "Nephrologists",
-        "booking_date": "2025-08-19",
-        "booking_time": "08:30AM TO 09:45AM",
-        "clinic": "13"
-    },
-    {
         "appointment_id": "8532df64-4181-47e5-b6da-a90474b1a201",
         "token_number": 1,
         "patient_name": "Kao",
