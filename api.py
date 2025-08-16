@@ -1,3 +1,5 @@
+import json
+import os
 from fastapi import FastAPI
 from pydantic import BaseModel
 import asyncio
@@ -7,6 +9,22 @@ from typing import List, Dict
 from app.my_agents import master_agent
 from geminiConfig import gemini_config
 from agents import Runner, set_tracing_disabled
+import redis # <--- IMPORT THE NEW LIBRARY
+
+
+try:
+    redis_client = redis.Redis(
+        host=os.getenv("REDIS_HOST"),
+        port=int(os.getenv("REDIS_PORT")),
+        password=os.getenv("REDIS_PASSWORD"),
+        decode_responses=True # <-- This makes it return strings, not bytes
+    )
+    # Ping the server to check the connection
+    redis_client.ping()
+    print("Successfully connected to Redis.")
+except Exception as e:
+    print(f"Error connecting to Redis: {e}")
+    redis_client = None
 
 # Disable tracing for the API
 set_tracing_disabled(True)
@@ -40,10 +58,16 @@ async def chat_with_agent(request: ChatRequest):
     Receives a user prompt and a session_id, and returns the agent's response,
     maintaining conversation history.
     """
+
+    if not redis_client:
+        return {"error": "Redis connection not available. Please check server configuration."}
+
     print(f"\nReceived prompt: '{request.prompt}' for session: {request.session_id}")
     
     # Get the history for this session, or create an empty list if it's a new session
-    history = SESSIONS.get(request.session_id, [])
+    history_json = redis_client.get(request.session_id)
+    history = json.loads(history_json) if history_json else []
+    
     
     # Append the user's new message to the history
     history.append({"role": "user", "content": request.prompt})
