@@ -3,14 +3,12 @@
 import json
 from agents import function_tool
 from typing import Optional
-import os # <--- ADD THIS LINE
+import os
 from datetime import datetime, timedelta
-import uuid # <--- ADD THIS FINAL IMPORT
-from .my_functions import load_bookings, load_schedule, load_absences, _internal_find_doctor,send_sms, _internal_cancel_booking
+import uuid
+from .my_functions import load_bookings, load_schedule, load_absences, _internal_find_doctor, send_sms, _internal_cancel_booking
 
-
-
-# --- File Paths (This part is correct) ---
+# --- File Paths ---
 SCHEDULE_FILE = "full_hospital_schedule_with_specialty.json"
 BOOKINGS_FILE = "bookings.json"
 ABSENTS_FILE = "dr_absents.json"
@@ -19,70 +17,65 @@ ABSENTS_FILE = "dr_absents.json"
 @function_tool
 def get_available_slots(
     doctor_name: str = None, 
-    specialty: str = None, 
-    day_of_week: str = None
+    specialty: str = None
 ) -> str:
     """
-    Calculates available appointment slots based on a flexible search.
-    Can filter by doctor name, specialty, and/or a specific day of the week for the next 14 days.
+    Calculates ALL available appointment slots for the next 14 days,
+    optionally filtered by a doctor's name or a specialty.
     """
-    # The rest of the function body is PERFECT and does not need to change.
-    print(f"[TOOL-DEBUG] Advanced search for: Dr={doctor_name}, Spec={specialty}, Day={day_of_week}")
+    print(f"[TOOL-DEBUG] Final search for: Dr={doctor_name}, Spec={specialty}")
     
-    # 1. Start with the full schedule and apply filters
-    candidate_schedules = load_schedule()
-
-    if specialty:
-        candidate_schedules = [s for s in candidate_schedules if specialty.lower() in s.get('specialty', '').lower()]
-    
-    if doctor_name:
-        candidate_schedules = _internal_find_doctor(doctor_name, candidate_schedules)
-
-    if not candidate_schedules:
-        return json.dumps({"success": True, "slots": []})
-
-    # 2. Load absences and all current bookings
-    absences = load_absences()
     try:
-        with open(BOOKINGS_FILE, 'r') as f: all_bookings = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError): all_bookings = []
+        candidate_schedules = load_schedule()
 
-    # 3. Check availability over the next 14 days
-    available_slots = []
-    today = datetime.now()
-    for i in range(14):
-        check_date = today + timedelta(days=i)
-        check_date_str = check_date.strftime("%Y-%m-%d")
-        current_day_of_week = check_date.strftime("%A")
+        if specialty:
+            candidate_schedules = [s for s in candidate_schedules if specialty.lower() in s.get('specialty', '').lower()]
+        
+        if doctor_name:
+            candidate_schedules = _internal_find_doctor(doctor_name, candidate_schedules)
 
-        if day_of_week and day_of_week.lower() not in current_day_of_week.lower():
-            continue
+        if not candidate_schedules:
+            return json.dumps({"success": True, "slots": []})
 
-        for schedule_entry in candidate_schedules:
-            doc_full_name = schedule_entry.get('doctor', '')
-            if not doc_full_name: continue
+        absences = load_absences()
+        all_bookings = load_bookings()
 
-            doctor_absent_dates = absences.get(doc_full_name, [])
-            if check_date_str in doctor_absent_dates:
-                continue
+        available_slots = []
+        today = datetime.now()
+        for i in range(14):
+            check_date = today + timedelta(days=i)
+            check_date_str = check_date.strftime("%Y-%m-%d")
+            current_day_of_week = check_date.strftime("%A")
 
-            if "on leave" in schedule_entry.get('time', '').lower():
-                continue # Skip this slot entirely if the doctor is on leave
-            # --- END OF ADDED BLOCK ---
+            for schedule_entry in candidate_schedules:
+                if "on leave" in schedule_entry.get('time', '').lower():
+                    continue
 
-            if current_day_of_week in schedule_entry.get('days', []):
-                bookings_on_date = [b for b in all_bookings if b.get('doctor_name') == doc_full_name and b.get('booking_date') == check_date_str]
-                if len(bookings_on_date) < 20:
-                    available_slots.append({
-                        "doctor": doc_full_name,
-                        "date": check_date_str,
-                        "day": current_day_of_week,
-                        "time": schedule_entry.get('time', 'N/A'),
-                        "clinic": schedule_entry.get('clinic', 'N/A'),
-                    })
+                doc_full_name = schedule_entry.get('doctor')
+                if not doc_full_name:
+                    continue
+
+                if current_day_of_week in schedule_entry.get('days', []):
+                    doctor_absent_dates = absences.get(doc_full_name, [])
+                    if check_date_str in doctor_absent_dates:
+                        continue
+                    
+                    bookings_on_date = [b for b in all_bookings if b.get('doctor_name') == doc_full_name and b.get('booking_date') == check_date_str]
+                    if len(bookings_on_date) < 20:
+                        available_slots.append({
+                            "doctor": doc_full_name,
+                            "date": check_date_str,
+                            "day": current_day_of_week,
+                            "time": schedule_entry.get('time', 'N/A'),
+                            "clinic": schedule_entry.get('clinic', 'N/A'),
+                        })
+        
+        return json.dumps({"success": True, "slots": available_slots})
+
+    except Exception as e:
+        print(f"[TOOL-ERROR] get_available_slots failed: {e}")
+        return json.dumps({"success": False, "message": f"An internal system error occurred: {str(e)}"})
     
-    return json.dumps({"success": True, "slots": available_slots})
-
 
 @function_tool
 def find_doctor_by_name(doctor_name: str) -> str:
@@ -106,7 +99,7 @@ def find_doctor_by_name(doctor_name: str) -> str:
     return json.dumps(simplified_results)
 
 @function_tool
-def list_doctors_by_specialty(specialty: str) -> str: # FIXED: Return type is now str
+def list_doctors_by_specialty(specialty: str) -> str:
     """
     Finds all doctors within a given specialty.
     Returns the result as a JSON string.
@@ -117,15 +110,9 @@ def list_doctors_by_specialty(specialty: str) -> str: # FIXED: Return type is no
         entry for entry in schedule
         if search_term in entry['specialty'].lower()
     ]
-    return json.dumps(matching_specialists) # FIXED: Return the list as a JSON string
+    return json.dumps(matching_specialists)
 
 
-
-import json
-
-# BASE_DIR = Path(__file__).resolve().parent.parent
-SCHEDULE_FILE = "full_hospital_schedule_with_specialty.json"
-BOOKINGS_FILE = "bookings.json"
 @function_tool
 def book_appointment(doctor_name: str, booking_date: str, booking_time: str, patient_name: str, patient_phone: str) -> str:
     """
