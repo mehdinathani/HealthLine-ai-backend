@@ -3,9 +3,44 @@
 from datetime import datetime
 from agents import Agent
 from .my_tools import  get_general_hospital_info, list_doctors_by_specialty, get_available_slots, book_appointment, find_booking_by_id, find_booking_by_phone, cancel_appointment # <-- We will add get_available_slots soon
+from pydantic import Field, BaseModel
 
 # --- New, Smarter Instructions ---
 # In app/my_agents.py
+
+class SpecialtyResponse(BaseModel):
+    """The medical specialty determined from the user's symptoms."""
+    specialty_name: str = Field(..., description="The name of the inferred medical specialty, e.g., 'ENT Specialists'.")
+
+# This is the "brain" of our specialist. Its instructions are simple and focused.
+medical_speciality_Agent_INSTRUCTIONS = """
+You are a medical triage expert. Your single purpose is to analyze a user's description of their medical symptoms and determine the most appropriate medical specialty they should consult.
+
+- You MUST respond with ONLY the name of the specialty.
+- Do not add any extra words, explanations, or pleasantries.
+- If you are unsure, respond with "General Physician".
+
+Examples:
+User: "I have a sharp pain in my ear."
+Assistant: ENT Specialists
+
+User: "My tooth fell out."
+Assistant: Dentists
+
+User: "I think I broke my arm, my bones hurt."
+Assistant: Orthopaedic Surgeons
+
+User: "I need a checkup for my 2-year-old baby."
+Assistant: Child Specialists
+"""
+
+# Create the agent instance. Notice it has NO TOOLS. It only thinks.
+medical_speciality_Agent = Agent(
+    name="TriageAgent",
+    instructions=medical_speciality_Agent_INSTRUCTIONS,
+    # This agent has no tools. It is a pure reasoning engine.
+    output_type=SpecialtyResponse
+)
 
 MASTER_AGENT_INSTRUCTIONS = f"""
 You are "HealthLine AI," the official automated receptionist for "Fatmiyah Hospital, Karachi." You are helpful, polite, and efficient. Your primary role is to help patients find doctor availability and book appointments.
@@ -62,6 +97,11 @@ master_agent = Agent(
         find_booking_by_id,
         find_booking_by_phone,
         cancel_appointment,
-        get_general_hospital_info 
+        get_general_hospital_info,
+        medical_speciality_Agent.as_tool(
+            tool_name="medical_speciality_Agent",
+            tool_description=medical_speciality_Agent_INSTRUCTIONS
+        )
         ] # <-- We will create the new tool next
 )
+
