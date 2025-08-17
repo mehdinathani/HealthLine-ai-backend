@@ -32,7 +32,6 @@ set_tracing_disabled(True)
 # --- Step 1: Create our in-memory session storage ---
 # This is a simple dictionary that will hold the history for each session.
 # In a production application, this would be replaced with a real database like Redis.
-SESSIONS: Dict[str, List[Dict[str, str]]] = {}
 
 # Create the FastAPI app instance
 app = FastAPI(
@@ -85,7 +84,7 @@ async def chat_with_agent(request: ChatRequest):
             history.append({"role": "assistant", "content": result.final_output})
 
         # Save the updated history back to our session store
-        SESSIONS[request.session_id] = history
+        redis_client.set(request.session_id, json.dumps(history), ex=86400)
         
         print(f"Agent response: {result.final_output}")
         return {"response": result.final_output}
