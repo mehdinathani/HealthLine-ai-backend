@@ -100,3 +100,15 @@ async def chat_with_agent(request: ChatRequest):
     except Exception as e:
         print(f"An error occurred in the agent runner: {e}")
         return {"error": "An internal error occurred. Please try again."}
+
+@app.get("/view-bookings-secret")
+def view_bookings():
+    """
+    A temporary, non-production endpoint to view the live bookings.json file.
+    """
+    try:
+        with open("bookings.json", 'r') as f:
+            bookings = json.load(f)
+        return {"bookings": bookings}
+    except Exception as e:
+        return {"error": str(e)}
