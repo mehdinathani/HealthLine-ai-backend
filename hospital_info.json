@@ -1,0 +1,34 @@
+{
+    "hospital_name": "Fatimiyah Hospital",
+    "location": {
+        "address": "272/2-3 Britto Rd, Garden East Karachi, 74400",
+        "google_maps_link": "https://share.google/A4RqbmTVuCFBqpgg5"
+    },
+    "contact": {
+        "main_phone": "UAN: 111 012 014",
+        "emergency_phone": "Ambulance: 111-232-021",
+        "email": "contact@fh.org.pk"
+    },
+    "parking_info": "On-site parking is available for visitors. For detailed information on rates, please contact the hospital's main line.",
+    "pharmacy_hours": "The hospital has an on-site pharmacy. Please call the main line for specific operational hours.",
+    "specialty_departments": [
+        "Cardiology",
+        "Dentistry",
+        "Dermatology",
+        "ENT (Ear, Nose, Throat)",
+        "General Surgery",
+        "Internal Medicine",
+        "Nephrology",
+        "Neurology",
+        "Gynaecology & Obstetrics",
+        "Ophthalmology (Eye Specialist)",
+        "Orthopaedics",
+        "Paediatrics (Child Specialist)",
+        "Psychiatry",
+        "Urology",
+        "Radiology",
+        "Emergency Services (24/7)"
+    ],
+    "About the Hospital": "Fatimiyah Hospital Karachi, Excellence With Quality At It's Best!, Started with a modest outpatient facility in July 2006, Fatimiyah Hospital today stands as a 106-bedded multi-disciplinary, secondary health care facility, constructed on a 2000 square yards land, located in Soldier Bazar. Today, Alhamdulillah, Fatimiyah Hospital Karachi enjoys a respectable status, not only in the community, but also amongst the general public at large ensuring nominal and affordable healthcare within the reach of a common man. As a part of our mission, the hospital also has School of Nursing, where a two year course of Nursing called ‘Certified Nursing Assistant’ (CNA), recognized by the Pakistan Nursing Council, exclusively for girls is being run. Year over year, our nurses have brought accolades by securing top positions in the entire province. The nurses emerging from this program are fully equipped with core Islamic values, along with professional excellence, grooming into caring, responsible, compassionate and empathic nurses.",
+    "For on Call Appointment": "Call at 021-32226631 and 021-32226652 to get Online Appointment in Fatimiyah Hospital"
+}

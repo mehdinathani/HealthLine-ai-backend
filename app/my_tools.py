@@ -6,7 +6,7 @@ from typing import Optional
 import os
 from datetime import datetime, timedelta
 import uuid
-from .my_functions import load_bookings, load_schedule, load_absences, _internal_find_doctor, send_sms, _internal_cancel_booking
+from .my_functions import get_hospital_info, load_bookings, load_schedule, load_absences, _internal_find_doctor, send_sms, _internal_cancel_booking
 
 # --- File Paths ---
 SCHEDULE_FILE = "full_hospital_schedule_with_specialty.json"
@@ -225,3 +225,18 @@ def cancel_appointment(appointment_id: str) -> str:
         return json.dumps({"success": True, "message": f"Successfully cancelled appointment {appointment_id}."})
     else:
         return json.dumps({"success": False, "message": f"Failed to cancel appointment {appointment_id}. The ID may not exist."})
+    
+def get_general_hospital_info(question: str) -> str:
+    """
+    Used to answer general questions about the hospital, such as location,
+    contact details, visiting hours, parking, or available departments.
+    The 'question' parameter should be the user's original query.
+    """
+    print(f"[TOOL-DEBUG] Getting general info for question: {question}")
+    
+    # This tool's job is simple: retrieve ALL the information.
+    # The AI model will then intelligently find the answer within this data.
+    info_data = get_hospital_info()
+    
+    # Return the entire info blob as a JSON string.
+    return json.dumps(info_data)

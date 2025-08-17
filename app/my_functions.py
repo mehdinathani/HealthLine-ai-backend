@@ -65,6 +65,16 @@ from pathlib import Path
 # BASE_DIR = Path(__file__).resolve().parent.parent
 SCHEDULE_FILE = "full_hospital_schedule_with_specialty.json"
 BOOKINGS_FILE = "bookings.json"
+INFO_FILE = "hospital_info.json"
+
+
+def get_hospital_info() -> dict:
+    """Loads the general hospital information from its JSON file."""
+    try:
+        with open(INFO_FILE, 'r') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {"error": "Hospital information file not found or is invalid."}
 
 def _internal_find_doctor(doctor_name: str, schedule: list) -> list:
     """
