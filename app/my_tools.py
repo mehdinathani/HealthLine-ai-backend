@@ -226,7 +226,7 @@ def cancel_appointment(appointment_id: str) -> str:
     else:
         return json.dumps({"success": False, "message": f"Failed to cancel appointment {appointment_id}. The ID may not exist."})
 
-@function    
+@function_tool
 def get_general_hospital_info(question: str) -> str:
     """
     Used to answer general questions about the hospital, such as location,
