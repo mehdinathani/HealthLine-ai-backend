@@ -4,6 +4,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import asyncio
 from typing import List, Dict
+from fastapi.middleware.cors import CORSMiddleware
+
 
 # Import the agent and config we've already built
 from app.my_agents import master_agent
@@ -39,7 +41,13 @@ app = FastAPI(
     description="An API for interacting with the hospital booking agent.",
     version="1.1.0" # Version bump!
 )
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins. For production, you'd list your specific frontend URL.
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers.
+)
 # --- Step 2: Update the request model to include a session_id ---
 class ChatRequest(BaseModel):
     prompt: str
