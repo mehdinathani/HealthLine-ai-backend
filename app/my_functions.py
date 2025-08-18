@@ -157,3 +157,12 @@ def load_bookings() -> list:
             return []
     except (FileNotFoundError, json.JSONDecodeError):
         return []
+    
+
+def get_unique_specialties() -> list:
+    """Extracts a unique, sorted list of all specialties from the schedule."""
+    schedule = load_schedule()
+    all_specialties = {entry.get('specialty', 'N/A') for entry in schedule}
+    # Sort and remove any 'N/A' if it exists
+    sorted_specialties = sorted([s for s in all_specialties if s != 'N/A'])
+    return sorted_specialties

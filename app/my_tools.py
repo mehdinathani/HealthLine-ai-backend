@@ -6,12 +6,22 @@ from typing import Optional
 import os
 from datetime import datetime, timedelta
 import uuid
-from .my_functions import get_hospital_info, load_bookings, load_schedule, load_absences, _internal_find_doctor, send_sms, _internal_cancel_booking
+from .my_functions import (get_hospital_info, load_bookings, load_schedule, load_absences, _internal_find_doctor, send_sms, _internal_cancel_booking,get_unique_specialties)
 
 # --- File Paths ---
 SCHEDULE_FILE = "full_hospital_schedule_with_specialty.json"
 BOOKINGS_FILE = "bookings.json"
 ABSENTS_FILE = "dr_absents.json"
+
+
+@function_tool
+def list_available_specialties() -> str:
+    """
+    Returns a JSON list of all medical specialties available at the hospital.
+    The TriageAgent should use this tool to see the valid options before making a final decision.
+    """
+    specialties = get_unique_specialties()
+    return json.dumps(specialties)
 
 
 @function_tool
@@ -23,8 +33,9 @@ def get_available_slots(
     Calculates ALL available appointment slots for the next 14 days,
     optionally filtered by a doctor's name or a specialty.
     """
+    # The body of your function is already perfect and handles the optional
+    # parameters correctly. No changes are needed inside the function.
     print(f"[TOOL-DEBUG] Final search for: Dr={doctor_name}, Spec={specialty}")
-    
     try:
         candidate_schedules = load_schedule()
 

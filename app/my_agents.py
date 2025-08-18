@@ -2,44 +2,45 @@
 
 from datetime import datetime
 from agents import Agent
-from .my_tools import  get_general_hospital_info, list_doctors_by_specialty, get_available_slots, book_appointment, find_booking_by_id, find_booking_by_phone, cancel_appointment # <-- We will add get_available_slots soon
+from .my_tools import  get_general_hospital_info, list_available_specialties, list_doctors_by_specialty, get_available_slots, book_appointment, find_booking_by_id, find_booking_by_phone, cancel_appointment # <-- We will add get_available_slots soon
 from pydantic import Field, BaseModel
+from geminiConfig import model
 
 # --- New, Smarter Instructions ---
 # In app/my_agents.py
 
+# --- 1. Define the Specialist Agent ---
 class SpecialtyResponse(BaseModel):
     """The medical specialty determined from the user's symptoms."""
-    specialty_name: str = Field(..., description="The name of the inferred medical specialty, e.g., 'ENT Specialists'.")
+    specialty_name: str = Field(..., description="The name of the inferred medical specialty.")
 
-# This is the "brain" of our specialist. Its instructions are simple and focused.
-medical_speciality_Agent_INSTRUCTIONS = """
-You are a medical triage expert. Your single purpose is to analyze a user's description of their medical symptoms and determine the most appropriate medical specialty they should consult.
+# --- THIS IS THE NEW, GROUNDED INSTRUCTION SET ---
+TRIAGE_AGENT_INSTRUCTIONS = """
+You are a highly precise medical triage AI. Your ONLY job is to select the correct medical specialty from a provided list based on a user's symptoms. You MUST follow this workflow exactly.
 
-- You MUST respond with ONLY the name of the specialty.
-- Do not add any extra words, explanations, or pleasantries.
-- If you are unsure, respond with "General Physician".
-
-Examples:
-User: "I have a sharp pain in my ear."
-Assistant: ENT Specialists
-
-User: "My tooth fell out."
-Assistant: Dentists
-
-User: "I think I broke my arm, my bones hurt."
-Assistant: Orthopaedic Surgeons
-
-User: "I need a checkup for my 2-year-old baby."
-Assistant: Child Specialists
+**MANDATORY WORKFLOW:**
+1.  You see a user's description of a medical symptom. Your first and only thought is: "I need to know which specialties are available at this hospital."
+2.  To get this information, you **MUST** call the `list_available_specialties` tool. This is your only allowed first step.
+3.  The tool will return a JSON list of valid specialty names, for example: `["Cardiology", "Dentists", "ENT Specialists", ...]`.
+4.  Now, look at the user's symptom and the list of specialties you received from the tool.
+5.  Your final task is to choose the single best-matching specialty from that list. Your answer **MUST** be one of the exact strings from the tool's output.
+6.  You **MUST** respond with a valid `SpecialtyResponse` object containing the exact specialty name you chose from the tool's output. For example, if the user says "tooth pain" and the tool returned `["Dentists", "Cardiology"]`, your response MUST be `{"specialty_name": "Dentists"}`.
 """
 
-# Create the agent instance. Notice it has NO TOOLS. It only thinks.
-medical_speciality_Agent = Agent(
+
+triage_agent = Agent(
     name="TriageAgent",
-    instructions=medical_speciality_Agent_INSTRUCTIONS,
-    # This agent has no tools. It is a pure reasoning engine.
-    output_type=SpecialtyResponse
+    instructions=TRIAGE_AGENT_INSTRUCTIONS,
+    output_type=SpecialtyResponse,
+    tools=[list_available_specialties],
+    model=model
+)
+
+# --- 2. Wrap the Specialist as a Tool with a CORRECT description ---
+triage_agent_tool = triage_agent.as_tool(
+    tool_name="medical_speciality_agent", # Use snake_case for tool names
+    # This is a short, clear description FOR THE MASTER AGENT.
+    tool_description="Use this tool ONLY when a user describes a medical symptom (e.g., 'ear pain', 'bones hurt') to determine the correct medical specialty."
 )
 
 MASTER_AGENT_INSTRUCTIONS = f"""
@@ -53,12 +54,9 @@ You operate as a strict state machine. You MUST follow these workflows and direc
 
 **--- WORKFLOW STATE MACHINE ---**
 
-**STATE 0: TRIAGE (Highest Priority)**
-- **IF** the user's message describes a medical symptom (e.g., "ear pain", "i have a toothache"), you **MUST** delegate this task to your specialist colleague by calling the `TriageAgent` tool.
-- The `TriageAgent` will return a structured response containing the correct specialty.
-- **AFTER** the `TriageAgent` returns the specialty, you **MUST** then immediately call the `get_available_slots` tool, using the `specialty_name` provided by the `TriageAgent`.
-- IF the user asks a general, non-booking related question about the hospital (e.g., "where are you located?", "what are the visiting hours?", "what is the emergency contact number?", "do you have a pharmacy?"), you MUST use the `get_general_hospital_info` tool.
-- The AI model's job is to look at the JSON data returned by the tool and formulate a natural language answer to the user's specific question. Do not just dump the raw JSON.
+**STATE 0: TRIAGE & GENERAL QUESTIONS**
+- **IF** the user describes a medical symptom (e.g., "ear pain", "I have a toothache"), you **MUST** first call the `medical_speciality_agent` tool. After it returns a specialty, you **MUST** then call `get_available_slots` with that specialty.
+- **IF** the user asks a general question about the hospital (location, hours, etc.), you **MUST** use the `get_general_hospital_info` tool.
 
 
 **STATE 1: GATHERING INFORMATION (Your Default State)**
@@ -101,10 +99,7 @@ master_agent = Agent(
         find_booking_by_phone,
         cancel_appointment,
         get_general_hospital_info,
-        medical_speciality_Agent.as_tool(
-            tool_name="medical_speciality_Agent",
-            tool_description=medical_speciality_Agent_INSTRUCTIONS
-        )
+        triage_agent_tool
         ] # <-- We will create the new tool next
 )
 
