@@ -23,7 +23,7 @@ You are a highly precise medical triage AI. Your ONLY job is to select the corre
 triage_agent = Agent(
     name="TriageAgent",
     instructions=TRIAGE_AGENT_INSTRUCTIONS,
-    response_model=SpecialtyResponse, # <-- Use response_model for structured output
+    output_type=SpecialtyResponse, # <-- Use response_model for structured output
     tools=[list_available_specialties],
     model=model
 )
