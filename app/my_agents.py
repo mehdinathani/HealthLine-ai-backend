@@ -1,11 +1,11 @@
 from datetime import datetime
-from agents import Agent, PydanticModel, function_tool, Runner # <-- Import necessary classes
+from agents import Agent, function_tool, Runner # <-- Import necessary classes
 from .my_tools import get_general_hospital_info, list_available_specialties, get_available_slots, book_appointment, find_booking_by_id, find_booking_by_phone, cancel_appointment
-from pydantic import Field
+from pydantic import Field, BaseModel
 from geminiConfig import model, gemini_config # <-- We need the run_config for the agent-as-tool
 
 # --- 1. Define the Specialist Agent ---
-class SpecialtyResponse(PydanticModel): # <-- Use PydanticModel from agents
+class SpecialtyResponse(BaseModel): # <-- Use PydanticModel from agents
     """The medical specialty determined from the user's symptoms."""
     specialty_name: str = Field(..., description="The name of the inferred medical specialty.")
 
