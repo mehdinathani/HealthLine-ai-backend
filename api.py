@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # Import the agent and config we've already built
 from app.my_agents import master_agent
 from geminiConfig import gemini_config
-from agents import Runner, set_tracing_disabled
+from agents import Runner, set_tracing_disabled, set_tracing_export_api_key
 import redis # <--- IMPORT THE NEW LIBRARY
 
 
@@ -29,7 +29,10 @@ except Exception as e:
     redis_client = None
 
 # Disable tracing for the API
-set_tracing_disabled(True)
+# set_tracing_disabled(True)
+    tracing_api_key = os.environ["OPENAI_API_KEY"]
+    set_tracing_export_api_key(tracing_api_key)
+    # print(tracing_api_key)
 
 # --- Step 1: Create our in-memory session storage ---
 # This is a simple dictionary that will hold the history for each session.

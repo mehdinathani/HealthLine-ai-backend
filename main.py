@@ -1,17 +1,21 @@
 # main.py
 
 import asyncio
-from agents import Runner, set_tracing_disabled, enable_verbose_stdout_logging
+import os
+from agents import Runner, set_tracing_disabled, enable_verbose_stdout_logging, set_tracing_export_api_key
 from geminiConfig import gemini_config
 from app.my_agents import master_agent
 
 # Disabling tracing for a cleaner console output
-set_tracing_disabled(True)
+# set_tracing_disabled(True)
 
 async def main():
     print("--- HealthLine AI Assistant ---")
     print("Ask about doctor schedules or book an appointment. Type 'exit' to quit.")
-    enable_verbose_stdout_logging()
+    # enable_verbose_stdout_logging()
+    tracing_api_key = os.environ["OPENAI_API_KEY"]
+    set_tracing_export_api_key(tracing_api_key)
+    print(tracing_api_key)
 
     # Step 1: Initialize the history list for this session
     # This list will store the entire conversation.
