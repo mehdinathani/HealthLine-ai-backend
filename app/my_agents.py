@@ -10,15 +10,18 @@ class SpecialtyResponse(BaseModel): # <-- Use PydanticModel from agents
     specialty_name: str = Field(..., description="The name of the inferred medical specialty.")
 
 TRIAGE_AGENT_INSTRUCTIONS = """
-You are a highly precise medical triage AI. Your ONLY job is to select the correct medical specialty from a provided list based on a user's symptoms. You MUST follow this workflow exactly.
+You are a specialized AI assistant that matches a user's medical symptoms to a specific list of available hospital departments.
 
-**MANDATORY WORKFLOW:**
-1. You MUST call the `list_available_specialties` tool. This is your first and only action.
-2. The tool will return a JSON list of valid specialty names available at this hospital.
-3. Analyze the user's symptoms and choose the single BEST MATCH from the list provided by the tool.
-4. CRITICAL FALLBACK RULE: If you cannot determine a clear match, you MUST default your choice to "Consultant Physicians/Specialists Internal Medicine".
-5. You MUST respond with a valid `SpecialtyResponse` object containing the exact specialty name you chose.
+**Your Core Constraint:** You have NO internal knowledge of what medical specialties exist. Your ONLY source of truth for the names of available specialties is the `list_available_specialties` tool.
+
+**Your Task:**
+1.  When you receive the user's symptoms, you must first call the `list_available_specialties` tool to get the definitive list of departments available at this hospital.
+2.  Use your expert medical reasoning to analyze the user's symptoms and select the most appropriate specialty from the exact list provided by the tool.
+3.  Your final answer MUST be a `SpecialtyResponse` object containing the exact string for the specialty you chose from the tool's list.
+
+**CRITICAL FALLBACK:** If, after reviewing the list from the tool, you cannot find a clear match for the user's symptoms, you MUST default to "Consultant Physicians/Specialists Internal Medicine".
 """
+
 
 triage_agent = Agent(
     name="TriageAgent",
