@@ -166,3 +166,33 @@ def get_unique_specialties() -> list:
     # Sort and remove any 'N/A' if it exists
     sorted_specialties = sorted([s for s in all_specialties if s != 'N/A'])
     return sorted_specialties
+
+def _calculate_availability_for_schedules(candidate_schedules: list) -> str:
+    """
+    Internal helper that takes a list of schedule entries and calculates
+    their real availability over the next 14 days.
+    """
+    absences = load_absences()
+    all_bookings = load_bookings()
+    available_slots = []
+    today = datetime.now()
+
+    for i in range(14):
+        check_date = today + timedelta(days=i)
+        check_date_str = check_date.strftime("%Y-%m-%d")
+        current_day_of_week = check_date.strftime("%A")
+
+        for schedule_entry in candidate_schedules:
+            if "on leave" in schedule_entry.get('time', '').lower(): continue
+            doc_full_name = schedule_entry.get('doctor')
+            if not doc_full_name: continue
+            
+            if current_day_of_week in schedule_entry.get('days', []):
+                doctor_absent_dates = absences.get(doc_full_name, [])
+                if check_date_str in doctor_absent_dates: continue
+                
+                bookings_on_date = [b for b in all_bookings if b.get('doctor_name') == doc_full_name and b.get('booking_date') == check_date_str]
+                if len(bookings_on_date) < 20:
+                    available_slots.append({"doctor": doc_full_name, "specialty": schedule_entry.get('specialty'), "date": check_date_str, "day": current_day_of_week, "time": schedule_entry.get('time'), "clinic": schedule_entry.get('clinic')})
+
+    return json.dumps({"success": True, "slots": available_slots})

@@ -2,12 +2,10 @@
 
 import asyncio
 import os
-from agents import Runner, set_tracing_disabled, enable_verbose_stdout_logging, set_tracing_export_api_key
+from agents import Runner, enable_verbose_stdout_logging, set_tracing_export_api_key
 from geminiConfig import gemini_config
 from app.my_agents import master_agent
 
-# Disabling tracing for a cleaner console output
-# set_tracing_disabled(True)
 
 async def main():
     print("--- HealthLine AI Assistant ---")

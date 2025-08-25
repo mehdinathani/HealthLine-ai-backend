@@ -2,11 +2,10 @@
 
 import json
 from agents import function_tool
-from typing import Optional
-import os
 from datetime import datetime, timedelta
 import uuid
-from .my_functions import (get_hospital_info, load_bookings, load_schedule, load_absences, _internal_find_doctor, send_sms, _internal_cancel_booking,get_unique_specialties)
+from .my_functions import (_calculate_availability_for_schedules, get_hospital_info, load_bookings, load_schedule, load_absences, _internal_find_doctor, send_sms, _internal_cancel_booking,get_unique_specialties)
+
 
 # --- File Paths ---
 SCHEDULE_FILE = "full_hospital_schedule_with_specialty.json"
@@ -24,68 +23,68 @@ def list_available_specialties() -> str:
     return json.dumps(specialties)
 
 
-@function_tool
-def get_available_slots(
-    doctor_name: str = None, 
-    specialty: str = None
-) -> str:
-    """
-    Calculates ALL available appointment slots for the next 14 days,
-    optionally filtered by a doctor's name or a specialty.
-    """
-    # The body of your function is already perfect and handles the optional
-    # parameters correctly. No changes are needed inside the function.
-    print(f"[TOOL-DEBUG] Final search for: Dr={doctor_name}, Spec={specialty}")
-    try:
-        candidate_schedules = load_schedule()
+# @function_tool
+# def get_available_slots(
+#     doctor_name: str = None, 
+#     specialty: str = None
+# ) -> str:
+#     """
+#     Calculates ALL available appointment slots for the next 14 days,
+#     optionally filtered by a doctor's name or a specialty.
+#     """
+#     # The body of your function is already perfect and handles the optional
+#     # parameters correctly. No changes are needed inside the function.
+#     print(f"[TOOL-DEBUG] Final search for: Dr={doctor_name}, Spec={specialty}")
+#     try:
+#         candidate_schedules = load_schedule()
 
-        if specialty:
-            candidate_schedules = [s for s in candidate_schedules if specialty.lower() in s.get('specialty', '').lower()]
+#         if specialty:
+#             candidate_schedules = [s for s in candidate_schedules if specialty.lower() in s.get('specialty', '').lower()]
         
-        if doctor_name:
-            candidate_schedules = _internal_find_doctor(doctor_name, candidate_schedules)
+#         if doctor_name:
+#             candidate_schedules = _internal_find_doctor(doctor_name, candidate_schedules)
 
-        if not candidate_schedules:
-            return json.dumps({"success": True, "slots": []})
+#         if not candidate_schedules:
+#             return json.dumps({"success": True, "slots": []})
 
-        absences = load_absences()
-        all_bookings = load_bookings()
+#         absences = load_absences()
+#         all_bookings = load_bookings()
 
-        available_slots = []
-        today = datetime.now()
-        for i in range(14):
-            check_date = today + timedelta(days=i)
-            check_date_str = check_date.strftime("%Y-%m-%d")
-            current_day_of_week = check_date.strftime("%A")
+#         available_slots = []
+#         today = datetime.now()
+#         for i in range(14):
+#             check_date = today + timedelta(days=i)
+#             check_date_str = check_date.strftime("%Y-%m-%d")
+#             current_day_of_week = check_date.strftime("%A")
 
-            for schedule_entry in candidate_schedules:
-                if "on leave" in schedule_entry.get('time', '').lower():
-                    continue
+#             for schedule_entry in candidate_schedules:
+#                 if "on leave" in schedule_entry.get('time', '').lower():
+#                     continue
 
-                doc_full_name = schedule_entry.get('doctor')
-                if not doc_full_name:
-                    continue
+#                 doc_full_name = schedule_entry.get('doctor')
+#                 if not doc_full_name:
+#                     continue
 
-                if current_day_of_week in schedule_entry.get('days', []):
-                    doctor_absent_dates = absences.get(doc_full_name, [])
-                    if check_date_str in doctor_absent_dates:
-                        continue
+#                 if current_day_of_week in schedule_entry.get('days', []):
+#                     doctor_absent_dates = absences.get(doc_full_name, [])
+#                     if check_date_str in doctor_absent_dates:
+#                         continue
                     
-                    bookings_on_date = [b for b in all_bookings if b.get('doctor_name') == doc_full_name and b.get('booking_date') == check_date_str]
-                    if len(bookings_on_date) < 20:
-                        available_slots.append({
-                            "doctor": doc_full_name,
-                            "date": check_date_str,
-                            "day": current_day_of_week,
-                            "time": schedule_entry.get('time', 'N/A'),
-                            "clinic": schedule_entry.get('clinic', 'N/A'),
-                        })
+#                     bookings_on_date = [b for b in all_bookings if b.get('doctor_name') == doc_full_name and b.get('booking_date') == check_date_str]
+#                     if len(bookings_on_date) < 20:
+#                         available_slots.append({
+#                             "doctor": doc_full_name,
+#                             "date": check_date_str,
+#                             "day": current_day_of_week,
+#                             "time": schedule_entry.get('time', 'N/A'),
+#                             "clinic": schedule_entry.get('clinic', 'N/A'),
+#                         })
         
-        return json.dumps({"success": True, "slots": available_slots})
+#         return json.dumps({"success": True, "slots": available_slots})
 
-    except Exception as e:
-        print(f"[TOOL-ERROR] get_available_slots failed: {e}")
-        return json.dumps({"success": False, "message": f"An internal system error occurred: {str(e)}"})
+#     except Exception as e:
+#         print(f"[TOOL-ERROR] get_available_slots failed: {e}")
+#         return json.dumps({"success": False, "message": f"An internal system error occurred: {str(e)}"})
     
 
 @function_tool
@@ -252,3 +251,30 @@ def get_general_hospital_info(question: str) -> str:
     
     # Return the entire info blob as a JSON string.
     return json.dumps(info_data)
+
+@function_tool
+def find_slots_by_doctor_name(doctor_name: str) -> str:
+    """
+    Use this tool to find all available appointment slots for a specific doctor by their name.
+    """
+    print(f"[TOOL-DEBUG] Searching slots for DOCTOR: {doctor_name}")
+    # This tool's logic is a simplified version of the old one
+    candidate_schedules = _internal_find_doctor(doctor_name, load_schedule())
+    if not candidate_schedules:
+        return json.dumps({"success": True, "slots": []})
+    
+    # We can reuse the core availability logic in a new helper function
+    return _calculate_availability_for_schedules(candidate_schedules)
+
+@function_tool
+def find_slots_by_specialty(specialty: str) -> str:
+    """
+    Use this tool to find all available appointment slots for a specific medical specialty.
+    """
+    print(f"[TOOL-DEBUG] Searching slots for SPECIALTY: {specialty}")
+    schedule = load_schedule()
+    candidate_schedules = [s for s in schedule if specialty.lower() in s.get('specialty', '').lower()]
+    if not candidate_schedules:
+        return json.dumps({"success": True, "slots": []})
+        
+    return _calculate_availability_for_schedules(candidate_schedules)
