@@ -1,5 +1,6 @@
 import json
 import os
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from pydantic import BaseModel
 import asyncio
@@ -10,7 +11,8 @@ from fastapi.middleware.cors import CORSMiddleware
 # Import the agent and config we've already built
 from app.my_agents import master_agent
 from geminiConfig import gemini_config
-from agents import Runner, set_tracing_disabled, set_tracing_export_api_key
+from agents import Runner, set_trace_processors, set_tracing_export_api_key, trace
+from agents.tracing.processors import default_processor
 import redis # <--- IMPORT THE NEW LIBRARY
 
 
@@ -28,11 +30,13 @@ except Exception as e:
     print(f"Error connecting to Redis: {e}")
     redis_client = None
 
-# Disable tracing for the API
-# set_tracing_disabled(True)
-    tracing_api_key = os.environ["OPENAI_API_KEY"]
-    set_tracing_export_api_key(tracing_api_key)
-    # print(tracing_api_key)
+    # tracing_api_key = os.environ["OPENAI_API_KEY"]
+# set_tracing_export_api_key(tracing_api_key)
+# print(tracing_api_key)
+    load_dotenv()
+    set_trace_processors([default_processor()])
+    api_key = os.getenv("OPENAI_API_KEY")
+    set_tracing_export_api_key(api_key)
 
 # --- Step 1: Create our in-memory session storage ---
 # This is a simple dictionary that will hold the history for each session.
@@ -84,11 +88,12 @@ async def chat_with_agent(request: ChatRequest):
 
     try:
         # Run the agent with the FULL conversation history
-        result = await Runner.run(
-            starting_agent=master_agent,
-            input=history,
-            run_config=gemini_config,
-        )
+        with trace("Healthline AI - API"):
+            result = await Runner.run(
+                starting_agent=master_agent,
+                input=history,
+                run_config=gemini_config,
+            )
 
         # Append the agent's response to the history
         if result.final_output:
